@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+
+<div class="perfil-container">
+
+  <section class="profile-card">
+    <h1>Perfil</h1>
+
+    @if (user$ | async; as user) {
+      <p><strong>Usuario:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+    } @else {
+      <p>No hay usuario conectado.</p>
+    }
+  </section>
+
+  <section class="cart-card">
+    <h2>Carrito</h2>
+
+    @if (cart$ | async; as cart) {
+
+      @if (cart.length === 0) {
+        <p class="empty-message">
+          El carrito está vacío
+        </p>
+      } @else {
+        
+        <ul class="cart-list">
+          @for (item of cart; track item.id) {
+            <li class="cart-item">
+
+              <div>
+                <strong>{{ item.name }}</strong>
+                <p>{{ item.price }} €</p>
+                <p>Cantidad: {{ item.quantity }}</p>
+
+                <div class="qty-controls">
+                  <button (click)="decrease(item)">-</button>
+                  <button (click)="increase(item)">+</button>
+                </div>
+
+                <button class="remove-btn" (click)="removeItem(item.id)">
+                  Eliminar
+                </button>
+              </div>
+
+              <div class="product-total">
+                {{ (item.quantity ?? 1) * (item.price ?? 0) }} €
+              </div>
+
+            </li>
+          }
+        </ul>
+
+        <p class="cart-total">
+          Total: {{ getTotal(cart) }} €
+        </p>
+
+      }
+
+    }
+  </section>
+
+</div>

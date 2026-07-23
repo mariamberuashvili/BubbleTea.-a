@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+
+  <h1>📞 Contacto</h1>
+  <p>Envíanos tu mensaje</p>
+
+  <form [formGroup]="contactForm" (ngSubmit)="send()">
+
+    <input type="text" placeholder="Nombre" formControlName="name" />
+    @if (submitted && contactForm.get('name')?.invalid) {
+      <small class="error-text">Nombre requerido</small>
+    }
+
+    <input type="email" placeholder="Email" formControlName="email" />
+    @if (submitted && contactForm.get('email')?.invalid) {
+      <small class="error-text">Email inválido</small>
+    }
+
+    <textarea placeholder="Mensaje" formControlName="message"></textarea>
+    @if (submitted && contactForm.get('message')?.invalid) {
+      <small class="error-text">Mensaje mínimo 10 caracteres</small>
+    }
+
+    <button type="submit" [disabled]="submitted && contactForm.invalid">
+      Enviar
+    </button>
+
+  </form>
+
+</div>

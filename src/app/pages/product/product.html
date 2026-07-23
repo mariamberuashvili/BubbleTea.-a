@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+
+<div class="product-page">
+
+  @if (loading) {
+    <p class="loading-message">Cargando producto...</p>
+  }
+
+  @if (errorMessage) {
+    <p class="error-message">{{ errorMessage }}</p>
+  }
+
+  @if (tea) {
+    <div class="product-card">
+      
+      <div class="product-header">
+        <h1>{{ tea.name }}</h1>
+        <p class="product-price">{{ tea.price }} €</p>
+      </div>
+
+      <div class="product-details">
+             <p>
+  <strong>Temperatura:</strong> {{ getTemperaturaTexto(tea) }}
+</p>
+        <p><strong>Stock:</strong> {{ tea.stock ? 'Disponible' : 'Agotado' }}</p>
+        <p><strong>ID del producto:</strong> {{ tea.id }}</p>
+      </div>
+      
+      <div class="product-actions">
+        <button type="button" class="btn-add" (click)="addToCart()">
+          Añadir al carrito
+        </button>
+        <button type="button" class="btn-buy" (click)="buyNow()">
+          Comprar ahora
+        </button>
+      </div>
+
+    </div>
+  }
+
+</div>

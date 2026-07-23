@@ -1,0 +1,96 @@
+.container {
+  padding: 30px;
+}
+
+.form-card {
+  width: 350px;
+
+  margin-bottom: 40px;
+
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+input,
+select {
+  padding: 12px;
+
+  border-radius: 12px;
+
+  border: 1px solid #ddd;
+}
+
+.stock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  width: 240px;
+
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+button {
+  width: 100%;
+
+  padding: 12px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  color: white;
+
+  cursor: pointer;
+
+  margin-top: 10px;
+}
+
+
+button[type="submit"] {
+  background: #93062e;
+}
+
+
+.edit-btn {
+  background: #029107;
+}
+
+
+.delete-btn {
+  background: #e31708;
+}
+
+button:hover {
+  opacity: 0.9;
+}

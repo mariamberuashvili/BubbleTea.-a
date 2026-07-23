@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+
+<div class="cart-container">
+  <section class="cart-panel">
+    <h1>Mi carrito</h1>
+    <p>Los productos que añadiste a tu carrito aparecen aquí.</p>
+
+    @if (cart$ | async; as cart) {
+      
+      @if (cart.length === 0) {
+        <p class="empty-message">
+          Tu carrito está vacío. Añade algunos tés desde el menú.
+        </p>
+      } @else {
+        
+        <div class="cart-items">
+          
+          @for (item of cart; track item.id) {
+            <article class="cart-item">
+              <div>
+                <h2>{{ item.name }}</h2>
+                <p>Cantidad: <strong>{{ item.quantity }}</strong></p>
+                <p>Precio unidad: <strong>{{ item.price }} €</strong></p>
+              </div>
+              <div class="item-total">
+                {{ (item.quantity ?? 1) * (item.price ?? 0) | number:'1.2-2' }} €
+              </div>
+            </article>
+          }
+
+          <div class="cart-summary">
+            <span>Total:</span>
+            <strong>{{ getTotal(cart) | number:'1.2-2' }} €</strong>
+          </div>
+
+          <a routerLink="/menu" class="continue-button">Seguir comprando</a>
+        </div>
+
+      }
+
+    }
+  </section>
+</div>

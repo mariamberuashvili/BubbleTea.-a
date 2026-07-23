@@ -1,0 +1,23 @@
+# ===== Monorepo BubbleTea =====
+
+# --- Backend (Python) ---
+**/venv/
+**/__pycache__/
+**/.env
+backend/secrets/
+
+# --- Frontend (Angular/Node) ---
+**/node_modules/
+**/dist/
+**/.angular/
+**/out-tsc/
+npm-debug.log
+yarn-error.log
+
+# --- IDEs / editores ---
+.idea/
+.history/
+
+# --- Sistema ---
+.DS_Store
+Thumbs.db

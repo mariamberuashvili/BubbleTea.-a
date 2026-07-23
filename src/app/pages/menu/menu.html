@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+
+<div class="menu-container">
+
+  <h1>Nuestros Tés</h1>
+
+  @if (errorMessage) {
+  <p class="error-message">{{ errorMessage }}</p>
+  }
+
+  @if (!loaded) {
+  <div class="loader">Cargando nuestra selección de tés...</div>
+  } @else {
+
+  @if (teas.length > 0) {
+  <div class="cards">
+
+    @for (tea of teas; track tea.id) {
+    <article class="card">
+
+      <a href="#" (click)="goToProduct(tea); $event.preventDefault()" class="card-link">
+        <div class="card-content">
+          <h2>{{ tea.name }}</h2>
+          <p class="price">{{ tea.price }} €</p>
+          <p>
+            <strong>Temperatura:</strong> {{ getTemperaturaTexto(tea) }}
+          </p>
+          <p><strong>Stock:</strong> {{ tea.stock ? 'Disponible' : 'Agotado' }}</p>
+        </div>
+        <span class="view-product">Ver producto</span>
+      </a>
+
+      <button type="button" class="card-button" (click)="addToCart(tea)">
+        Añadir al carrito
+      </button>
+
+    </article>
+    }
+
+  </div>
+  } @else {
+  <p class="empty-message">No hay tés disponibles.</p>
+  }
+
+  }
+
+</div>

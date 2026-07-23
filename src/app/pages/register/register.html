@@ -1,0 +1,56 @@
+<div class="bg">
+  <div class="card">
+
+    <h1>🧋 Bubble Tea Register</h1>
+    <p class="subtitle">Crea tu cuenta</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+      <input type="text" placeholder="Nombre" formControlName="name" />
+      @if (submitted && registerForm.get('name')?.invalid) {
+        <small class="error-text">Nombre requerido</small>
+      }
+
+      <input type="text" placeholder="Apellido" formControlName="surname" />
+      @if (submitted && registerForm.get('surname')?.invalid) {
+        <small class="error-text">Apellido requerido</small>
+      }
+
+      <input type="email" placeholder="Gmail" formControlName="email" />
+      @if (submitted && registerForm.get('email')?.invalid) {
+        <small class="error-text">Email inválido</small>
+      }
+
+      <input type="password" placeholder="Contraseña" formControlName="password" />
+      @if (submitted && registerForm.get('password')?.invalid) {
+        <small class="error-text">Mínimo 6 caracteres</small>
+      }
+
+      <input type="password" placeholder="Confirmar contraseña" formControlName="confirmPassword" />
+      
+      @if (submitted && registerForm.errors?.['mismatch']) {
+        <small class="error-text">Las contraseñas no coinciden</small>
+      }
+
+      <button type="submit" [disabled]="submitted && registerForm.invalid">
+        Crear cuenta
+      </button>
+    </form>
+
+    @if (errorMsg) {
+      <p class="error">{{ errorMsg }}</p>
+    }
+
+    @if (successMsg) {
+      <div class="success-box">
+        <p>✅ Registro completado correctamente</p>
+        <button (click)="goToLogin()">Ir a iniciar sesión</button>
+      </div>
+    }
+
+    <p class="footer">
+      ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a>
+    </p>
+
+  </div>
+</div>

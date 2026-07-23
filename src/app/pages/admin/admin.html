@@ -1,0 +1,69 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+
+  <h1>🛡️ Admin Panel</h1>
+
+  <div class="form-card">
+
+    <h2>
+      @if (editMode) { ✏️ Editar Tea } @else { ➕ Añadir Tea }
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="saveTea()">
+
+      <input type="text" placeholder="Nombre del Tea" formControlName="name" />
+
+      <input type="number" placeholder="Precio" formControlName="price" />
+
+      <select formControlName="temperature">
+        <option [value]="0">Fría</option>
+        <option [value]="1">Caliente</option>
+        <option [value]="2">Fría y Caliente</option>
+      </select>
+
+      <label class="stock">
+        <input type="checkbox" formControlName="stock" />
+        Disponible en stock
+      </label>
+
+      <div class="action-buttons" style="display: flex; gap: 10px;">
+        <button type="submit" [disabled]="form.invalid">
+          @if (editMode) { Guardar cambios } @else { Añadir producto }
+        </button>
+        
+        @if (editMode) {
+          <button type="button" class="cancel-btn" (click)="resetForm()" style="background-color: #6c757d;">
+            Cancelar
+          </button>
+        }
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="products">
+    
+    @for (tea of teas; track tea.id) {
+      <div class="card">
+        <h2>{{ tea.name }}</h2>
+        <p>💰 {{ tea.price }} €</p>
+        <p>🌡️ {{ tea.temperature === 2 ? 'Fría y Caliente' : (tea.temperature === 1 ? 'Caliente' : 'Fría') }}</p>
+        <p>
+          @if (tea.stock) {
+            <span>✅ Disponible</span>
+          } @else {
+            <span>❌ Sin stock</span>
+          }
+        </p>
+        <button class="edit-btn" (click)="editTea(tea)">Editar</button>
+        <button class="delete-btn" (click)="deleteTea(tea.id)">Eliminar</button>
+      </div>
+    } @empty {
+      <p>No hay productos disponibles.</p>
+    }
+
+  </div>
+
+</div>
