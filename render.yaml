@@ -1,0 +1,43 @@
+services:
+  # ---------- Backend (FastAPI) ----------
+  - type: web
+    name: bubbletea-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: FIREBASE_API_KEY
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      # Path where the Render "Secret File" containing the Firebase
+      # service account JSON is mounted (create it in the dashboard).
+      - key: FIREBASE_SERVICE_ACCOUNT_PATH
+        value: /etc/secrets/serviceAccountKey.json
+      # Comma-separated list of extra allowed origins (the deployed
+      # frontend URL), added on top of the localhost defaults.
+      - key: CORS_ORIGINS
+        sync: false
+
+  # ---------- Frontend (Angular SSR) ----------
+  - type: web
+    name: bubbletea-frontend
+    runtime: node
+    rootDir: frontend
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: node dist/frontend/server/server.mjs
