@@ -1,10 +1,10 @@
-from pathlib import Path
+import os
 import firebase_admin
 from firebase_admin import credentials
+from dotenv import load_dotenv
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-cred_path = BASE_DIR / "secrets" / "serviceAccountKey.json"
+load_dotenv()
 
 if not firebase_admin._apps:
-    cred = credentials.Certificate(str(cred_path))
+    cred = credentials.Certificate(os.getenv("FIREBASE_CREDENTIALS"))
     firebase_admin.initialize_app(cred)
