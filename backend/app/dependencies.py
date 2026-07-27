@@ -14,14 +14,17 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
             detail="Authorization header missing or invalid",
         )
 
-    try:
-        return verify_firebase_token(credentials.credentials)
+    # Verificamos el token con Firebase
+    token_data = verify_firebase_token(credentials.credentials)
 
-    except Exception:
+    # Si la función devolvió None (token inválido/expirado), lanzamos el error 401
+    if not token_data:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired Firebase token",
         )
+
+    return token_data
 
 
 def require_admin_user(token_data: dict = Depends(verify_token)):
