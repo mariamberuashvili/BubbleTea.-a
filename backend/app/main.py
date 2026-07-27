@@ -5,12 +5,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-print("\n" + "="*30)
-print("🔥 DIAGNÓSTICO DE INICIO")
-print("FIREBASE_API_KEY DETECTADA:", os.getenv("FIREBASE_API_KEY"))
-print("="*30 + "\n")
-
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
