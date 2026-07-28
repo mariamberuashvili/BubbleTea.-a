@@ -31,6 +31,6 @@ def verify_firebase_token(token: str):
         decoded_token = auth.verify_id_token(token)
         return decoded_token
     except Exception as e:
-        # Puedes imprimir el error en los logs de Render para depurar si falla la verificación
+        # Puedes imprimir el error en los logs de Render para depurar si falla la verificación  ADMIN_EMAIL=admin@test.com cont-123456
         print(f"Error verificando el token de Firebase: {e}")
         return None
