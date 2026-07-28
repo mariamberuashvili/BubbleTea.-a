@@ -22,6 +22,7 @@ allow_origins = default_origins + [o.strip() for o in extra_origins.split(",") i
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allow_origins,
+    allow_origin_regex=r"^https://bubbletea-a(-\d+)?\.onrender\.com$",
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization"],
